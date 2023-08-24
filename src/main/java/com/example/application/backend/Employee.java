@@ -1,5 +1,8 @@
 package com.example.application.backend;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Employee {
     private static long id_tracker = 42L; 
 
@@ -24,6 +27,8 @@ public class Employee {
 
     }
 
+    @NotBlank(message = "First name is mandatory")
+    @Size(max = 10, message = "First name cannot be longer than 10 characters")
     public String getFirstname() {
         return firstname;
     }
@@ -32,6 +37,8 @@ public class Employee {
         this.firstname = firstname;
     }
 
+    @NotBlank(message = "Last name is mandatory")
+    @Size(max = 10, message = "Last name cannot be longer than 10 characters")
     public String getLastname() {
         return lastname;
     }
@@ -48,6 +55,7 @@ public class Employee {
         this.title = title;
     }
 
+    @NotBlank(message = "Email is mandatory")
     public String getEmail() {
         return email;
     }

@@ -7,11 +7,11 @@ import { HorizontalLayout } from "@hilla/react-components/HorizontalLayout.js";
 import { Notification } from "@hilla/react-components/Notification.js";
 import { SplitLayout } from "@hilla/react-components/SplitLayout.js";
 import { TextField } from "@hilla/react-components/TextField.js";
-import { useBinder } from "@hilla/react-form";
+import { useBinder, useBinderNode } from "@hilla/react-form";
 import Employee from "Frontend/generated/com/example/application/backend/Employee";
 import EmployeeModel from "Frontend/generated/com/example/application/backend/EmployeeModel";
 import { MasterDetailEndpoint } from "Frontend/generated/endpoints";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function MasterDetailView() {
     const [selectedItems, setSelectedItems] = useState<Employee[]>([]);
@@ -35,6 +35,34 @@ export default function MasterDetailView() {
         );
 
         callback(data.employees, data.totalSize);
+    }, []);
+
+    const fnNode =
+        // @ts-ignore
+        useBinderNode(model.firstname);
+    const rootNode =
+        // @ts-ignore
+        useBinderNode(model);
+    useEffect(() => {
+        fnNode.addValidator({
+            message: "What's the purpose of this message?",
+            validate: (value: unknown) => {
+                if (typeof value === "string" && value.includes("Vaadin")) {
+                    return { property: model.firstname, message: "Must not contain Vaadin" };
+                }
+                return true;
+            }
+        });
+        rootNode.addValidator({
+            message: "What's the purpose of this message?",
+            validate: (value: unknown) => {
+                const v = value as Employee;
+                if (v.firstname === v.lastname) {
+                    return { property: model.lastname, message: "Must not be equal to first name" };
+                }
+                return true;
+            }
+        });
     }, []);
 
     return (

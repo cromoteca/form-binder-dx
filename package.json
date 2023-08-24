@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@hilla/form": "file:../../github/hilla/packages/ts/form/hilla-form-2.2.0-alpha7.tgz",
-    "@hilla/frontend": "2.2.0-alpha7",
+    "@hilla/frontend": "file:../../github/hilla/packages/ts/hilla-frontend/hilla-frontend-2.2.0-alpha7.tgz",
     "@hilla/generator-typescript-cli": "2.2.0-alpha7",
     "@hilla/generator-typescript-core": "2.2.0-alpha7",
     "@hilla/generator-typescript-plugin-backbone": "2.2.0-alpha7",
@@ -129,6 +129,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "5c61e97ec13698998a094ec03bf75cbba027b1477907121062c4cacf44237401"
+    "hash": "f9b23cf9a7172369d60c0e4a2edf0c289a0c4ed80bf7c4e396ff4e634bc5d392"
   }
 }

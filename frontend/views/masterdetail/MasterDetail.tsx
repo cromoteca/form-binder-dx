@@ -11,12 +11,12 @@ import { useBinder } from "@hilla/react-form";
 import Employee from "Frontend/generated/com/example/application/backend/Employee";
 import EmployeeModel from "Frontend/generated/com/example/application/backend/EmployeeModel";
 import { MasterDetailEndpoint } from "Frontend/generated/endpoints";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function MasterDetailView() {
     const [selectedItems, setSelectedItems] = useState<Employee[]>([]);
 
-    const { model, submit, field, read, clear } = useBinder(EmployeeModel, {
+    const { model, submit, field, read, clear, reset } = useBinder(EmployeeModel, {
         onSubmit: async (e) => {
             await MasterDetailEndpoint.saveEmployee(e);
             Notification.show(`Submitted: ${JSON.stringify(e)}`);
@@ -68,7 +68,7 @@ export default function MasterDetailView() {
                         <EmailField label="Email" {...field(model.email)} />
                     </FormLayout>
                     <HorizontalLayout id="button-layout" theme="spacing">
-                        <Button theme="tertiary" slot="">Reset</Button>
+                        <Button theme="tertiary" slot="" onClick={reset}>Reset</Button>
                         <Button theme="primary" onClick={submit}>Save</Button>
                     </HorizontalLayout>
                 </div >
